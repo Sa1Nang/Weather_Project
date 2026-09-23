@@ -1,0 +1,252 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Monochrome gallery: Obsidian canvas, flat color-step elevation, 3-voice type.
+ * Light mode is a designed inverted companion (Cloud canvas, Pure cards).
+ * Legacy token names (--surface, --ink, --wine, --violet, --lilac, --lagoon)
+ * are remapped to neutrals so existing components keep working.
+ * Chromatic tokens (--iris, --cyan-signal, etc.) are kept as neutral
+ * aliases so no colored fills remain in the theme.
+ */
+:root {
+  color-scheme: light;
+
+  /* Neutral aliases (formerly chromatic — now monochrome) */
+  --iris: #101214;
+  --cyan-signal: #101214;
+  --pale-iris: #e5e5e5;
+  --deep-iris: #101214;
+  --orchid: #e5e5e5;
+  --periwinkle: #e5e5e5;
+
+  /* Light companion surfaces */
+  --obsidian: #f5f5f7;
+  --abyss: #ececee;
+  --graphite-card: #ffffff;
+  --steel-hover: #ececee;
+  --silver-inverted: #0f1011;
+
+  /* Semantic (light) */
+  --surface: #ffffff;
+  --surface-muted: #f5f5f7;
+  --ink: #101214;
+  --ink-muted: #5b5c5e;
+  --mist: #e5e5e5;
+  --ash: #5b5c5e;
+  --cloud: #101214;
+
+  /* Legacy remaps (all neutral) */
+  --wine: #000000;
+  --wine-ink: #ffffff;
+  --violet: #101214;
+  --violet-soft: #5b5c5e;
+  --lilac: #e5e5e5;
+  --lagoon: #101214;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --obsidian: #0f1011;
+  --abyss: #090a0b;
+  --graphite-card: #2e2e2e;
+  --steel-hover: #3f4041;
+  --silver-inverted: #cacaca;
+
+  --surface: #2e2e2e;
+  --surface-muted: #0f1011;
+  --ink: #ffffff;
+  --ink-muted: #9f9fa0;
+  --mist: rgba(255, 255, 255, 0.12);
+  --ash: #9f9fa0;
+  --cloud: #f5f5f7;
+
+  --wine: #ffffff;
+  --wine-ink: #000000;
+  --violet: #ffffff;
+  --violet-soft: #9f9fa0;
+  --lilac: #3f4041;
+  --lagoon: #ffffff;
+}
+
+body {
+  background-color: var(--surface-muted);
+  color: var(--ink);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display voice — Plus Jakarta Sans: geometric, high-legibility numerals
+ * for temperatures and headings. Tabular figures keep temps from jittering. */
+.font-display {
+  font-family:
+    'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Voice 3 — mono labels: uppercase technical annotations. */
+.mono-label {
+  font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 11px;
+  line-height: 2;
+}
+
+/* Selected fills are neutral — no contrast overrides needed. */
+
+/* Weather-aware page backdrop: one soft vertical wash per bucket.
+ * Cards stay monochrome — only the canvas tints. Keep it subtle
+ * so text contrast never depends on the backdrop. */
+.weather-bg {
+  transition: background 0.7s ease;
+}
+/* Gentle fade so photo swaps don't pop. Killed by reduced-motion below. */
+.weather-photo {
+  animation: weather-photo-in 0.9s ease both;
+}
+@keyframes weather-photo-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.weather-bg-neutral {
+  background: var(--surface-muted);
+}
+.weather-bg-clear-day {
+  background: linear-gradient(180deg, #fff6e0 0%, var(--surface-muted) 72%);
+}
+.weather-bg-clear-night {
+  background: linear-gradient(180deg, #dfe4ee 0%, var(--surface-muted) 72%);
+}
+.weather-bg-warm-night {
+  background: linear-gradient(180deg, #f5e6c8 0%, var(--surface-muted) 72%);
+}
+.weather-bg-partly-day,
+.weather-bg-partly {
+  background: linear-gradient(180deg, #eef1f5 0%, var(--surface-muted) 72%);
+}
+.weather-bg-partly-night {
+  background: linear-gradient(180deg, #e2e6ee 0%, var(--surface-muted) 74%);
+}
+.weather-bg-cloudy-day,
+.weather-bg-cloudy {
+  background: linear-gradient(180deg, #e4e7ec 0%, var(--surface-muted) 75%);
+}
+.weather-bg-cloudy-night {
+  background: linear-gradient(180deg, #d6dae1 0%, var(--surface-muted) 76%);
+}
+.weather-bg-fog-day,
+.weather-bg-fog {
+  background: linear-gradient(180deg, #eceef0 0%, var(--surface-muted) 75%);
+}
+.weather-bg-fog-night {
+  background: linear-gradient(180deg, #dee1e5 0%, var(--surface-muted) 76%);
+}
+.weather-bg-wet-day,
+.weather-bg-wet {
+  background: linear-gradient(180deg, #dce8f2 0%, var(--surface-muted) 75%);
+}
+.weather-bg-wet-night {
+  background: linear-gradient(180deg, #c9d8e8 0%, var(--surface-muted) 76%);
+}
+.weather-bg-storm-day,
+.weather-bg-storm {
+  background: linear-gradient(180deg, #d5dae1 0%, var(--surface-muted) 78%);
+}
+.weather-bg-storm-night {
+  background: linear-gradient(180deg, #c3c9d4 0%, var(--surface-muted) 78%);
+}
+.dark .weather-bg-clear-day {
+  background: linear-gradient(180deg, #2a2415 0%, var(--surface-muted) 75%);
+}
+.dark .weather-bg-clear-night {
+  background: linear-gradient(180deg, #0d1322 0%, var(--surface-muted) 75%);
+}
+.dark .weather-bg-warm-night {
+  background: linear-gradient(180deg, #231a0e 0%, var(--surface-muted) 75%);
+}
+.dark .weather-bg-partly-day,
+.dark .weather-bg-partly {
+  background: linear-gradient(180deg, #161a21 0%, var(--surface-muted) 75%);
+}
+.dark .weather-bg-partly-night {
+  background: linear-gradient(180deg, #10141d 0%, var(--surface-muted) 76%);
+}
+.dark .weather-bg-cloudy-day,
+.dark .weather-bg-cloudy {
+  background: linear-gradient(180deg, #191c22 0%, var(--surface-muted) 78%);
+}
+.dark .weather-bg-cloudy-night {
+  background: linear-gradient(180deg, #12151c 0%, var(--surface-muted) 78%);
+}
+.dark .weather-bg-fog-day,
+.dark .weather-bg-fog {
+  background: linear-gradient(180deg, #181a1d 0%, var(--surface-muted) 78%);
+}
+.dark .weather-bg-fog-night {
+  background: linear-gradient(180deg, #121316 0%, var(--surface-muted) 78%);
+}
+.dark .weather-bg-wet-day,
+.dark .weather-bg-wet {
+  background: linear-gradient(180deg, #101a25 0%, var(--surface-muted) 78%);
+}
+.dark .weather-bg-wet-night {
+  background: linear-gradient(180deg, #0c1622 0%, var(--surface-muted) 80%);
+}
+.dark .weather-bg-storm-day,
+.dark .weather-bg-storm {
+  background: linear-gradient(180deg, #14161d 0%, var(--surface-muted) 80%);
+}
+.dark .weather-bg-storm-night {
+  background: linear-gradient(180deg, #0e1016 0%, var(--surface-muted) 80%);
+}
+
+/* Origin motion: quick 0.2s ease state transitions, long 2.5s reveals. */
+.origin-reveal {
+  animation: origin-fade 2.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+}
+@keyframes origin-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Visible keyboard focus — white ring on dark, black ring on light. */
+:focus-visible {
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.dark :focus-visible {
+  outline-color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .origin-reveal {
+    animation: none;
+  }
+}

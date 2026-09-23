@@ -1,0 +1,51 @@
+/**
+ * Minimal Open-Meteo forecast payload for unit tests ONLY.
+ * Hand-built fixture (not live data, never rendered in the app).
+ */
+export const openMeteoFixture: unknown = {
+  latitude: 14.5995,
+  longitude: 120.9842,
+  timezone: 'Asia/Manila',
+  current: {
+    time: '2026-09-22T13:30',
+    temperature_2m: 29.3,
+    relative_humidity_2m: 77,
+    apparent_temperature: 35.0,
+    is_day: 1,
+    precipitation: 0.6,
+    weather_code: 95,
+    cloud_cover: 75,
+    pressure_msl: 1009.5,
+    surface_pressure: 1008.0,
+    wind_speed_10m: 9.4,
+    wind_direction_10m: 257,
+    wind_gusts_10m: 20.0,
+  },
+  hourly: {
+    time: ['2026-09-22T12:00', '2026-09-22T13:00', '2026-09-22T14:00'],
+    temperature_2m: [29.0, 29.3, 30.1],
+    apparent_temperature: [34.0, 35.0, 36.2],
+    precipitation_probability: [40, 80, 20],
+    precipitation: [0.2, 0.6, 0.0],
+    weather_code: [3, 95, 2],
+    relative_humidity_2m: [78, 77, 70],
+    wind_speed_10m: [8.0, 9.4, 12.0],
+    uv_index: [5.0, 6.5, 7.0],
+    visibility: [20000, 16000, 24000],
+    is_day: [1, 1, 1],
+  },
+  daily: {
+    time: ['2026-09-22', '2026-09-23'],
+    weather_code: [95, 61],
+    temperature_2m_max: [31.0, 30.2],
+    temperature_2m_min: [25.0, 24.8],
+    sunrise: ['2026-09-22T05:45', '2026-09-23T05:45'],
+    sunset: ['2026-09-22T17:50', '2026-09-23T17:50'],
+    uv_index_max: [8.5, 7.0],
+    precipitation_sum: [12.4, 3.0],
+    precipitation_probability_max: [80, 60],
+    wind_speed_10m_max: [25.0, 18.0],
+    wind_gusts_10m_max: [45.0, 30.0],
+    wind_direction_10m_dominant: [250, 200],
+  },
+}
